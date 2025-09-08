@@ -2,6 +2,26 @@
 #include <stdlib.h>
 #include <time.h>
 
+int game(int computer, int user) {
+    if (computer == user) {
+        return -1;
+    }
+    // 0 ROCK 1 PAPER 2 SCISSOR
+    if(computer == 0 && user == 2) {
+        return 0;  // ROCK PAPER (LOSE)
+    } else if (computer == 0 && user == 3) {
+        return 0; // ROCK SCISSOR (LOSE)
+    } else if (computer == 1 && user == 1) {
+        return 1; // PAPER ROCK (WIN)
+    } else if (computer == 1 && user == 3) {
+        return 1; // PAPER SCISSOR (WIN)
+    } else if (computer == 2 && user == 1) {
+        return 1; // SCISSOR ROCK (WIN)
+    } else if (computer == 2 && user == 2) {
+        return 0; // SCISSOR PAPER
+    }
+}
+
 int main() {
     int choice;
     char buffer[16];
@@ -33,12 +53,19 @@ int main() {
 
     int computerChoice = rand() % 3;
 
-    return 0;
-}
+    int result = game(computerChoice, choice);
 
-int game(int computer, int user) {
-
-    if (computer == user) {
-        return -1;
+    printf("YOU: %d vs COMPUTER: %d\n", choice, computerChoice);
+    
+    if(result == -1) {
+        printf("Game Draw!\n");
+    } else if(result == 1) {
+        printf("Congratulations! You have won the game.\n");
+    } else {
+        printf("OH! You have lost the game!\n");
     }
+
+    
+
+    return 0;
 }
